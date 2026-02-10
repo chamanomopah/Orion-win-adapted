@@ -254,4 +254,11 @@ ALGORITHM REQUIRED — DEPTH: FULL
 Nothing escapes the Algorithm. Your response MUST use the 7-phase format:
 - Start with: 🤖 PAI ALGORITHM header
 - Include ALL phases: OBSERVE → THINK → PLAN → BUILD → EXECUTE → VERIFY → LEARN
-- Use TaskCreate 
+- Use TaskCreate for ISC criteria, TaskList to display them
+- End with voice line
+</system-reminder>`);
+    process.exit(0);
+  }
+}
+
+main();

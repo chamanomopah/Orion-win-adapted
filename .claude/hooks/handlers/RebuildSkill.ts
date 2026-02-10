@@ -22,9 +22,12 @@
 import { statSync, readdirSync } from 'fs';
 import { join } from 'path';
 import { spawnSync } from 'child_process';
+import { PLATFORM } from '../lib/platform-paths';
+import { getPaiDir } from '../lib/paths';
 
 export async function handleRebuildSkill(): Promise<void> {
-  const CORE_DIR = join(process.env.HOME!, '.claude/skills/PAI');
+  const PAI_DIR = getPaiDir();
+  const CORE_DIR = join(PAI_DIR, 'skills', 'PAI');
   const COMPONENTS_DIR = join(CORE_DIR, 'Components');
   const SKILL_MD = join(CORE_DIR, 'SKILL.md');
   const BUILD_SCRIPT = join(CORE_DIR, 'Tools/CreateDynamicCore.ts');
@@ -61,9 +64,11 @@ export async function handleRebuildSkill(): Promise<void> {
 }
 
 function rebuild(buildScript: string): void {
+  const PAI_DIR = getPaiDir();
   const result = spawnSync('bun', [buildScript], {
-    cwd: join(process.env.HOME!, '.claude/skills/PAI'),
+    cwd: join(PAI_DIR, 'skills', 'PAI'),
     encoding: 'utf-8',
+    shell: PLATFORM === 'win32', // Windows requires shell for some commands
   });
 
   if (result.error) {

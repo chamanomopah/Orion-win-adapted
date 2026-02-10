@@ -27,6 +27,7 @@ import { join } from 'path';
 import { getPSTComponents, getISOTimestamp } from './lib/time';
 import { inference } from '../skills/PAI/Tools/Inference';
 import { PLATFORM } from './lib/platform-paths';
+import { getPaiDir } from './lib/paths';
 
 interface HookInput {
   session_id: string;
@@ -49,7 +50,8 @@ interface PromptClassification {
   is_new_topic: boolean;
 }
 
-const BASE_DIR = process.env.PAI_DIR || join((process.env.USERPROFILE || process.env.HOME)!, '.claude');
+// Cross-platform path resolution using getPaiDir from lib/paths
+const BASE_DIR = getPaiDir();
 const WORK_DIR = join(BASE_DIR, 'MEMORY', 'WORK');
 const STATE_DIR = join(BASE_DIR, 'MEMORY', 'STATE');
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');

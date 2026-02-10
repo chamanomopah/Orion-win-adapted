@@ -20,6 +20,7 @@ import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { spawn } from 'child_process';
 import { join } from 'path';
 import { paiPath } from '../lib/paths';
+import { PLATFORM } from '../lib/platform-paths';
 import {
   parseToolUseBlocks,
   isSignificantChange,
@@ -148,6 +149,7 @@ function spawnIntegrityMaintenance(
       detached: true,
       stdio: ['pipe', 'ignore', 'inherit'],  // stdin for input, ignore stdout, inherit stderr for logging
       env: { ...process.env },
+      shell: PLATFORM === 'win32', // Windows requires shell for detached processes
     });
 
     // Write input data to stdin

@@ -54,8 +54,10 @@ import { writeFileSync, existsSync, readFileSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { getISOTimestamp, getPSTDate } from './lib/time';
 import { getLearningCategory } from './lib/learning-utils';
+import { getPaiDir } from './lib/paths';
 
-const MEMORY_DIR = join(process.env.HOME!, '.claude', 'MEMORY');
+const PAI_DIR = getPaiDir();
+const MEMORY_DIR = join(PAI_DIR, 'MEMORY');
 const STATE_DIR = join(MEMORY_DIR, 'STATE');
 const CURRENT_WORK_FILE = join(STATE_DIR, 'current-work.json');
 const WORK_DIR = join(MEMORY_DIR, 'WORK');

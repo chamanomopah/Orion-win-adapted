@@ -1,0 +1,37 @@
+{
+  "name": "@pai/platform",
+  "version": "2.5.0",
+  "description": "Cross-platform utilities for PAI v2.5",
+  "main": "platform.ts",
+  "types": "platform.ts",
+  "scripts": {
+    "test": "bun test",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "keywords": [
+    "pai",
+    "cross-platform",
+    "utilities",
+    "windows",
+    "macos",
+    "linux"
+  ],
+  "author": "Daniel Miessler <https://danielmiessler.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0.0"
+  },
+  "exports": {
+    ".": "./platform.ts",
+    "./paths": "./paths.ts",
+    "./commands": "./commands.ts",
+    "./permissions": "./permissions.ts",
+    "./process": "./process.ts"
+  }
+}

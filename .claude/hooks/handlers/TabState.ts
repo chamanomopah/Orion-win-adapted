@@ -20,6 +20,7 @@ import { inference } from '../../skills/PAI/Tools/Inference';
 import { paiPath } from '../lib/paths';
 import { getISOTimestamp } from '../lib/time';
 import { getDAName } from '../lib/identity';
+import { PLATFORM } from '../lib/platform-paths';
 import type { ParsedTranscript, ResponseState } from '../../skills/PAI/Tools/TranscriptParser';
 
 // Tab color states for visual feedback (inactive tab only - active tab stays dark blue)
@@ -181,6 +182,12 @@ function extractSpecificSubject(voiceLine: string): string {
  */
 export async function handleTabState(parsed: ParsedTranscript): Promise<void> {
   let plainCompletion = parsed.plainCompletion;
+
+  // Skip Kitty terminal commands on Windows
+  if (PLATFORM === 'win32') {
+    console.error('[TabState] Skipping Kitty tab updates on Windows');
+    return;
+  }
 
   // Validate completion
   if (!isValidVoiceCompletion(plainCompletion)) {
